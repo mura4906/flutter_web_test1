@@ -23,6 +23,20 @@ class _MyFirestorePageState extends State<MyFirestorePage> {
                     .set({'name': '鈴木', 'age': 40}); // データ
               },
             ),
+            ElevatedButton(
+              child: Text('データ取得'),
+              onPressed: () async {
+                final CollectionReference users =
+                    FirebaseFirestore.instance.collection('users');
+
+                QuerySnapshot querySnapshot = await users.get();
+
+                  // 取得したデータの処理
+                  querySnapshot.docs.forEach((doc) {
+                    print(doc.data());
+                  });
+              },
+            ),
           ],
         ),
       ),
